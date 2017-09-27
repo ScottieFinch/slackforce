@@ -39,7 +39,7 @@
         "required":false
     },
     "SLACK_WORK_TOKEN": {
-        "description": "Slack token for the WorkItem slash command",
+        "description": "Slack token for the work slash command",
         "value":"",
         "required":false
     }
