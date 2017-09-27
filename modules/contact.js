@@ -13,7 +13,7 @@ exports.execute = (req, res) => {
 
     let slackUserId = req.body.user_id,
         oauthObj = auth.getOAuthObject(slackUserId),
-        q = "SELECT Id, Name, MobilePhone, Email FROM Contact WHERE Name LIKE '%" + req.body.text + "%' LIMIT 5";
+        q = "SELECT Id, Name, Email FROM Contact WHERE Name LIKE '%" + req.body.text + "%' LIMIT 5";
 
     force.query(oauthObj, q)
         .then(data => {
@@ -23,7 +23,6 @@ exports.execute = (req, res) => {
                 contacts.forEach(function(contact) {
                     let fields = [];
                     fields.push({title: "Name", value: contact.Name, short:true});
-                    fields.push({title: "Mobile", value: contact.MobilePhone, short:true});
                     fields.push({title: "Email", value: contact.Email, short:true});
                     fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + contact.Id, short:false});
                     attachments.push({color: "#A094ED", fields: fields});
