@@ -10,23 +10,24 @@ exports.execute = (req, res) => {
         res.send("Invalid token");
         return;
     }
-
+  
     let slackUserId = req.body.user_id,
         oauthObj = auth.getOAuthObject(slackUserId),
-        q = "SELECT Id, Name, Email FROM Contact WHERE Name LIKE '%" + req.body.text + "%' LIMIT 5";
+        q = "SELECT Id, Name, agf__Status__c FROM agf__ADM_Work__c WHERE Name LIKE '%" + req.body.text + "%' LIMIT 1";
 
     force.query(oauthObj, q)
         .then(data => {
-            let contacts = JSON.parse(data).records;
-            if (contacts && contacts.length>0) {
+            let workItems = JSON.parse(data).records;
+            if (workItems && workItems.length>0) {
                 let attachments = [];
-                contacts.forEach(function(contact) {
+                workItems.forEach(function(workItem) {
                     let fields = [];
-                    fields.push({title: "Name", value: contact.Name, short:true});
-                    fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + contact.Id, short:false});
+                    fields.push({title: "Name", value: workItem.Name, short:true});
+                    fields.push({title: "Status", value: workItem.agf__Status__c, short:true});
+                    fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + workItem.Id, short:false});
                     attachments.push({color: "#A094ED", fields: fields});
                 });
-                res.json({text: "Contacts matching '" + req.body.text + "':", attachments: attachments});
+                res.json({text: "Work Items matching '" + req.body.text + "':", attachments: attachments});
             } else {
                 res.send("No records");
             }
