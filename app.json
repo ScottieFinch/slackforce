@@ -22,11 +22,6 @@
         "description": "Salesforce login URL",
         "value":"https://login.salesforce.com"
     },
-    "SLACK_ACCOUNT_TOKEN": {
-        "description": "Slack token for the account slash command",
-        "value":"",
-        "required":false
-    },
     "SLACK_CONTACT_TOKEN": {
       "description": "Slack token for the contact slash command",
       "value":"",
@@ -43,8 +38,8 @@
         "value":"",
         "required":false
     },
-    "SLACK_WHOAMI_TOKEN": {
-        "description": "Slack token for the whoami slash command",
+    "SLACK_WORK_TOKEN": {
+        "description": "Slack token for the WorkItem slash command",
         "value":"",
         "required":false
     }
