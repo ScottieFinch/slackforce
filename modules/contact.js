@@ -23,7 +23,6 @@ exports.execute = (req, res) => {
                 contacts.forEach(function(contact) {
                     let fields = [];
                     fields.push({title: "Name", value: contact.Name, short:true});
-                    fields.push({title: "Email", value: contact.Email, short:true});
                     fields.push({title: "Open in Salesforce:", value: oauthObj.instance_url + "/" + contact.Id, short:false});
                     attachments.push({color: "#A094ED", fields: fields});
                 });
